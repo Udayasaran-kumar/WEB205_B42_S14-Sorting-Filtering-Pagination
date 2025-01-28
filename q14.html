@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Content Loading</title>
+</head>
+<body>
+  <h1>Dynamic Content Loading</h1>
+  <div class="items" id="itemList"></div>
+  <div class="controls">
+    <button id="loadMoreBtn">Load More</button>
+    <p id="message"></p>
+  </div>
+
+  <script>
+       let items =['item1','item2','item3','item4','item5','item6','item7','item8','item9','item10',
+    'item11','item12','item13','item14','item15','item16','item17','item18','item19','item20',
+    'item21','item22','item23','item24','item25','item26','item27','item28','item29','item30'
+    ];
+     let currentIndex = 0;
+    let itemsPerPage = 5;
+     let itemList = document.getElementById('itemList');
+    let loadMoreBtn = document.getElementById('loadMoreBtn');
+    let message = document.getElementById('message');
+    function renderItems() {
+      let nextItems = items.slice(currentIndex, currentIndex + itemsPerPage);
+      itemList.textContent += nextItems.join(', ') + (nextItems.length ? ', ' : '');
+      currentIndex += itemsPerPage;
+        if (currentIndex >= items.length) {
+             message.textContent = 'No more items to load.';
+      }
+    }
+
+       loadMoreBtn.addEventListener('click', renderItems);
+
+        renderItems();
+  </script>
+</body>
+</html>
