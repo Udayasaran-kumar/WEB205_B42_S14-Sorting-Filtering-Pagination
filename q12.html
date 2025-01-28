@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Filter for a List</title>
+</head>
+<body>
+  <h1>Fruit Search</h1>
+  <input type="text" id="searchBar" placeholder="Search for a fruit...">
+  <ul id="fruitList"></ul>
+
+  <script>
+       let fruits = ['Apple', 'Banana', 'Orange', 'Grape', 'Pineapple', 'Strawberry', 'Watermelon', 'Mango', 'Blueberry', 'Peach'];
+
+    let searchBar = document.getElementById('searchBar');
+    let fruitList = document.getElementById('fruitList');
+
+        function renderList(filteredFruits) {
+      fruitList.innerHTML = ''; 
+            filteredFruits.forEach(fruit => {
+        let li = document.createElement('li');
+        li.textContent = fruit;
+        fruitList.appendChild(li);
+      });
+    }
+
+     renderList(fruits);
+
+        searchBar.addEventListener('input', () => {
+      let searchTerm = searchBar.value.toLowerCase();
+      let filteredFruits = fruits.filter(fruit => fruit.toLowerCase().includes(searchTerm));
+      renderList(filteredFruits);
+    });
+  </script>
+</body>
+</html>
