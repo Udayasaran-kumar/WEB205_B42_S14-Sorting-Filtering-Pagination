@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paginated List</title>
+
+</head>
+<body>
+  <h1>Paginated List</h1>
+  <div class="numbers" id="numberList"></div>
+  <div class="pagination">
+    <button id="prevBtn">Previous</button>
+    <span id="pageNumber">Page 1</span>
+    <button id="nextBtn">Next</button>
+  </div>
+
+  <script>
+    // Array of numbers from 1 to 50
+    let numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50];
+
+    // Pagination variables
+    let currentPage = 1;
+    let itemsPerPage = 10;
+    let totalPages = Math.ceil(numbers.length / itemsPerPage);
+
+    // DOM elements
+    let numberList = document.getElementById('numberList');
+    let prevBtn = document.getElementById('prevBtn');
+    let nextBtn = document.getElementById('nextBtn');
+    let pageNumber = document.getElementById('pageNumber');
+
+    // Function to render the current page
+    function renderPage(page) {
+      let startIndex = (page - 1) * itemsPerPage;
+      let endIndex = startIndex + itemsPerPage;
+      let pageItems = numbers.slice(startIndex, endIndex);
+      numberList.textContent = pageItems.join(', ');
+
+      // Update the page number
+      pageNumber.textContent = `Page ${page}`;
+    }
+
+    // Event listeners for buttons
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderPage(currentPage);
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderPage(currentPage);
+      }
+    });
+
+    // Initial render
+    renderPage(currentPage);
+  </script>
+</body>
+</html>
